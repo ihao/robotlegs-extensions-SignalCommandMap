@@ -55,17 +55,17 @@ package robotlegs.bender.extensions.signalCommandMap.impl
 		/**
 		 * @inheritDoc
 		 */
-		public function map(signalClass:Class):ICommandMapper
+		public function map(signal:ISignal):ICommandMapper
 		{
-			return getTrigger(signalClass).createMapper();
+			return getTrigger(signal).createMapper();
 		}
 
 		/**
 		 * @inheritDoc
 		 */
-		public function unmap(signalClass:Class):ICommandUnmapper
+		public function unmap(signal:ISignal):ICommandUnmapper
 		{
-			return getTrigger(signalClass).createMapper();
+			return getTrigger(signal).createMapper();
 		}
 
 		public function addMappingProcessor(handler:Function):ISignalCommandMap
@@ -79,19 +79,19 @@ package robotlegs.bender.extensions.signalCommandMap.impl
 		/* Private Functions                                                          */
 		/*============================================================================*/
 
-		private function createTrigger(signalClass:Class):ICommandTrigger
+		private function createTrigger(signal:ISignal):ICommandTrigger
 		{
-			return new SignalCommandTrigger(_injector, signalClass, _mappingProcessors);
+			return new SignalCommandTrigger(_injector, signal, _mappingProcessors);
 		}
 
-		private function getTrigger(signalClass:Class):SignalCommandTrigger
+		private function getTrigger(signal:ISignal):SignalCommandTrigger
 		{
-			return _triggerMap.getTrigger(signalClass) as SignalCommandTrigger;
+			return _triggerMap.getTrigger(signal) as SignalCommandTrigger;
 		}
 
-		private function getKey(signalClass:Class):Object
+		private function getKey(signal:ISignal):Object
 		{
-			return signalClass;
+			return signal;
 		}
 	}
 }

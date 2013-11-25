@@ -28,7 +28,7 @@ package robotlegs.bender.extensions.signalCommandMap.impl
 		/* Private Properties                                                         */
 		/*============================================================================*/
 
-		private var _signalClass:Class;
+		// private var _signalClass:Class;
 
 		private var _signal:ISignal;
 
@@ -47,13 +47,13 @@ package robotlegs.bender.extensions.signalCommandMap.impl
 		 */
 		public function SignalCommandTrigger(
 			injector:IInjector,
-			signalClass:Class,
+			signal:ISignal,
 			processors:Array = null,
 			logger:ILogger = null)
 		{
 			_injector = injector;
 
-			_signalClass = signalClass;
+			_signal = signal;
 			_mappings = new CommandMappingList(this, processors, logger);
 			_executor = new CommandExecutor(injector, _mappings.removeMapping);
 		}
@@ -75,9 +75,11 @@ package robotlegs.bender.extensions.signalCommandMap.impl
 		 */
 		public function activate():void
 		{
+			/*
 			if (!_injector.hasMapping(_signalClass))
 				_injector.map(_signalClass).asSingleton();
 			_signal = _injector.getInstance(_signalClass);
+			*/
 			_signal.add(routePayloadToCommands);
 		}
 
@@ -92,7 +94,8 @@ package robotlegs.bender.extensions.signalCommandMap.impl
 
 		public function toString():String
 		{
-			return String(_signalClass);
+			// return String(_signalClass);
+			return String("modify for support signal bus");
 		}
 
 		/*============================================================================*/
